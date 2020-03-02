@@ -4,10 +4,12 @@ After=network.target
 StartLimitIntervalSec=0
 
 [Service]
-Type=simple
+Type=notify
 ExecStart=/home/ubuntu/Documents/publish/SystemdHealthcheck
 Restart=always
 RestartSec=1
+TimeoutSec=5
+WatchdogSec=60
 
 [Install]
 WantedBy=multi-user.target

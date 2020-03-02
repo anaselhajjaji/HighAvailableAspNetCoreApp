@@ -6,6 +6,8 @@ using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace SystemdHealthcheck.HealthChecks
 {
@@ -30,6 +32,12 @@ namespace SystemdHealthcheck.HealthChecks
             {
                 _logger.LogInformation("{Timestamp} Readiness Probe Status: {Result}", 
                     DateTime.UtcNow, report.Status);
+
+                // Call systemd-notify on linux
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    StartSystemdNotify();
+                }    
             }
             else
             {
@@ -40,6 +48,37 @@ namespace SystemdHealthcheck.HealthChecks
             cancellationToken.ThrowIfCancellationRequested();
 
             return Task.CompletedTask;
+        }
+
+        private void StartSystemdNotify() 
+        {
+            _logger.LogInformation("{Timestamp} Notify systemd...", DateTime.UtcNow);
+            try 
+            {
+                var process = new Process();
+                process.StartInfo.FileName = "/bin/systemd-notify";
+                process.StartInfo.Arguments = "--ready";
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.OutputDataReceived += (sender, data) => {
+                    _logger.LogInformation("{Timestamp} systemd { Result }...", 
+                        DateTime.UtcNow,
+                        data.Data);
+                };
+                process.StartInfo.RedirectStandardError = true;
+                process.ErrorDataReceived += (sender, data) => {
+                    _logger.LogInformation("{Timestamp} systemd { Result }...", 
+                        DateTime.UtcNow,
+                        data.Data);
+                };
+                process.Start();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "{Timestamp} systemd-notify could not be run.", DateTime.UtcNow);
+                
+            }
         }
     }
 }
