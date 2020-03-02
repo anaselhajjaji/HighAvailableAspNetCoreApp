@@ -45,8 +45,9 @@ namespace SystemdHealthcheck
 
             services.Configure<HealthCheckPublisherOptions>(options =>
             {
-                options.Delay = TimeSpan.FromSeconds(2);
+                options.Delay = TimeSpan.FromSeconds(5);
                 options.Predicate = (check) => check.Tags.Contains("ready");
+                options.Period = TimeSpan.FromSeconds(30);
             });
 
             services.AddSingleton<IHealthCheckPublisher, HealthCheckPublisher>();
