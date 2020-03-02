@@ -23,3 +23,11 @@ To test: `docker inspect --format='{{json .State.Health}}' CONTAINER_ID`
 ## Build for linux
 
 To build for Raspberry Pie 3: `dotnet publish -c Release -r linux-arm64 --self-contained true`
+
+## systemd support
+
+Move the file SystemdHealthcheck.service to: `/etc/systemd/system/SystemdHealthcheck.service`
+
+Then: `sudo systemctl start SystemdHealthcheck`
+
+To see the status: `sudo systemctl status SystemdHealthcheck`
