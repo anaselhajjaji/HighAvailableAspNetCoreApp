@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using SystemdHealthcheck.HealthChecks;
 
 namespace SystemdHealthcheck
 {
@@ -25,6 +26,17 @@ namespace SystemdHealthcheck
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // Add Health Check publisher
+            services.AddHealthChecks();
+
+            services.Configure<HealthCheckPublisherOptions>(options =>
+            {
+                options.Delay = TimeSpan.FromSeconds(2);
+                options.Predicate = (check) => check.Tags.Contains("ready");
+            });
+
+            services.AddSingleton<IHealthCheckPublisher, HealthCheckPublisher>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +54,7 @@ namespace SystemdHealthcheck
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }
