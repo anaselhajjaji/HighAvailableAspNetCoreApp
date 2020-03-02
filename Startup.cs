@@ -12,6 +12,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using SystemdHealthcheck.HealthChecks;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using SystemdHealthcheck.Services;
 
 namespace SystemdHealthcheck
 {
@@ -29,11 +30,18 @@ namespace SystemdHealthcheck
         {
             services.AddControllers();
 
+            services.AddHostedService<WorkerService>();
+            services.AddSingleton<WorkerServiceHealthCheck>();
+
             // Add health checks UI
             services.AddHealthChecksUI();
 
             // Add Health Check publisher
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+                .AddCheck<WorkerServiceHealthCheck>(
+                    "worker_running_check",
+                    failureStatus: HealthStatus.Degraded,
+                    tags: new[] { "ready" }); ;
 
             services.Configure<HealthCheckPublisherOptions>(options =>
             {
