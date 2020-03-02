@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using SystemdHealthcheck.HealthChecks;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace SystemdHealthcheck
 {
@@ -26,6 +28,9 @@ namespace SystemdHealthcheck
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // Add health checks UI
+            services.AddHealthChecksUI();
 
             // Add Health Check publisher
             services.AddHealthChecks();
@@ -51,10 +56,19 @@ namespace SystemdHealthcheck
 
             app.UseAuthorization();
 
+            // Add health check UI
+            app.UseHealthChecksUI(config => config.UIPath = "/health-ui");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/health");
+
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    // Wtite the health in a format understandable by the HealthCheckUI
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
         }
     }
