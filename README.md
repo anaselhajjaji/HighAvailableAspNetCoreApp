@@ -13,3 +13,9 @@ Done in Visual Studio Code using :
 Command Palette `(Ctrl+Shift+P)` and enter `Docker: Add Docker Files to Workspace....` 
 
 For debug: you can instead do `Docker: Initialize for Docker debugging`
+
+### Docker health check
+
+Added to Dockerfile: `HEALTHCHECK CMD curl --fail http://localhost:80/health || exit 1`
+
+To test: `docker inspect --format='{{json .State.Health}}' CONTAINER_ID`
