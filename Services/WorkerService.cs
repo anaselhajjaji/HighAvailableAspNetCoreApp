@@ -12,7 +12,7 @@ namespace SystemdHealthcheck.Services
     {
         private ILogger<WorkerService> _logger;
         private readonly WorkerServiceHealthCheck _workerServiceHealthCheck;
-
+        private int stopWorkerAfterSeconds = 30;
 
         public WorkerService(ILogger<WorkerService> logger,
             WorkerServiceHealthCheck workerServiceHealthCheck)
@@ -23,12 +23,13 @@ namespace SystemdHealthcheck.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            while (!stoppingToken.IsCancellationRequested && stopWorkerAfterSeconds > 0)
             {
                 _logger.LogInformation("Worker service running at { time }", DateTimeOffset.Now);
                 _workerServiceHealthCheck.WorkerRunner = true;
 
                 await Task.Delay(1000, stoppingToken);
+                stopWorkerAfterSeconds--;
             }
 
             _workerServiceHealthCheck.WorkerRunner = false;
