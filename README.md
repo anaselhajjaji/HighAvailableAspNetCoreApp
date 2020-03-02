@@ -1,3 +1,5 @@
+![.NET Core](https://github.com/anaselhajjaji/SystemdHealthcheck/workflows/.NET%20Core/badge.svg?branch=master)
+
 # SystemdHealthcheck
 
 use of systemd healthcheck mechanism
