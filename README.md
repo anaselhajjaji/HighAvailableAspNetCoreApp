@@ -19,3 +19,7 @@ For debug: you can instead do `Docker: Initialize for Docker debugging`
 Added to Dockerfile: `HEALTHCHECK CMD curl --fail http://localhost:80/health || exit 1`
 
 To test: `docker inspect --format='{{json .State.Health}}' CONTAINER_ID`
+
+## Build for linux
+
+To build for Raspberry Pie 3: `dotnet publish -c Release -r linux-arm64 --self-contained true`
