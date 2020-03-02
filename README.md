@@ -1,3 +1,5 @@
+![.NET Core](https://github.com/anaselhajjaji/SystemdHealthcheck/workflows/.NET%20Core/badge.svg?branch=master) ![Deploy to docker hub](https://github.com/anaselhajjaji/systemdhealthcheck/workflows/Deploy%20to%20docker%20hub/badge.svg?branch=master)
+
 # SystemdHealthcheck
 
 use of systemd healthcheck mechanism
