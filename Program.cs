@@ -16,11 +16,16 @@ namespace SystemdHealthcheck
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args) 
+        {
+            var port = Environment.GetEnvironmentVariable("PORT");
+
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    {
+                        webBuilder.UseUrls("http://*:"+port);
+                        webBuilder.UseStartup<Startup>();
+                    });
+        }
     }
 }
