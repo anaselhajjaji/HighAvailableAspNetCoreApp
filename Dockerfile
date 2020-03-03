@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
-EXPOSE 5000
+EXPOSE $PORT
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
@@ -19,4 +19,4 @@ COPY --from=publish /app/publish .
 
 HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit 1
 
-ENTRYPOINT ["dotnet", "SystemdHealthcheck.dll"]
+ENTRYPOINT ["dotnet", "SystemdHealthcheck.dll", "--server.urls", "http://0.0.0.0:$PORT"]
