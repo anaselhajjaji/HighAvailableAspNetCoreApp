@@ -34,8 +34,12 @@ namespace SystemdHealthcheck
             services.AddSingleton<WorkerServiceHealthCheck>();
 
             // Add health checks UI
-            services.AddHealthChecksUI();
-
+            var port = Environment.GetEnvironmentVariable("PORT");
+            services.AddHealthChecksUI(setupSettings: setup =>
+            {
+                setup.AddHealthCheckEndpoint("Application HealthCheck", "http://localhost:"+ port +"/health");
+            });
+            
             // Add Health Check publisher
             services.AddHealthChecks()
                 .AddCheck<WorkerServiceHealthCheck>(
