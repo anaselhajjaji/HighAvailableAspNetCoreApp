@@ -18,5 +18,6 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit 1
+ENV ASPNETCORE_URLS http://*:$PORT
 
-ENTRYPOINT ["dotnet", "SystemdHealthcheck.dll", "--server.urls", "http://0.0.0.0:$PORT"]
+ENTRYPOINT ["dotnet", "SystemdHealthcheck.dll"]
