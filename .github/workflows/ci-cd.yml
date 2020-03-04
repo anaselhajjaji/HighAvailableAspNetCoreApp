@@ -16,10 +16,10 @@ jobs:
         uses: actions/checkout@master
 
       - name: Build the solution
-        uses: ./.github/actions/dotnetcore@master
+        uses: ./.github/actions/dotnetcore
 
       - name: Deploy to Pre Production Environment
-        uses: ./.github/actions/heroku@master
+        uses: ./.github/actions/herokupreprod
 
       - name: Publish the image to docker hub
-        uses: ./.github/actions/dockerimage@master
+        uses: ./.github/actions/dockerimage
