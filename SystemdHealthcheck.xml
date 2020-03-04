@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SystemdHealthcheck</name>
+    </assembly>
+    <members>
+        <member name="M:SystemdHealthcheck.Controllers.EmployeesController.Get">
+            <summary>
+            Returns all the registered employees.
+            </summary>
+            <returns>All the registered employees</returns>
+        </member>
+        <member name="M:SystemdHealthcheck.Controllers.EmployeesController.Create(SystemdHealthcheck.Models.Employee)">
+             <summary>
+             Creates an employee.
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /Todo
+                 {
+                    "id": 1,
+                    "firstName": "First Name",
+                    "lastName": "Last Name",
+                    "email": "email@email.com"
+                 }
+            
+             </remarks>
+             <param name="employee">the employee to create.</param>
+             <returns>A newly created employee.</returns>
+             <response code="201">Returns the newly created employee</response>
+             <response code="400">If the item is null</response>     
+        </member>
+    </members>
+</doc>

@@ -2,7 +2,13 @@
 
 # SystemdHealthcheck
 
-use of systemd healthcheck mechanism
+Use of systemd healthcheck mechanism
+
+Health Check available at: /health
+
+Health Check UI available at: /health-ui
+
+Swagger available at : /swagger
 
 ## Project initialization
 
