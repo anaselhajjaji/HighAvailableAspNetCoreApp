@@ -8,6 +8,10 @@
     <DocumentationFile>C:\Users\anahaj1\Documents\samples\SystemdHealthcheck\SystemdHealthcheck.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\anahaj1\Documents\samples\SystemdHealthcheck\SystemdHealthcheck.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="healthchecksdb" />
   </ItemGroup>
