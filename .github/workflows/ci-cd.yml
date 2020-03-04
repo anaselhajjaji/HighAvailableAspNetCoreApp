@@ -15,11 +15,39 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@master
 
-      - name: Build the solution
-        uses: ./.github/actions/dotnetcore
-
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.100' # SDK Version to use.
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+      
       - name: Deploy to Pre Production Environment
-        uses: ./.github/actions/herokupreprod
-
-      - name: Publish the image to docker hub
-        uses: ./.github/actions/dockerimage
+        if: success()
+        uses: AkhileshNS/heroku-deploy@v3.0.0
+        with:
+          # This will be used for authentication. You can find it in your heroku homepage account settings
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          # Email that you use with heroku
+          heroku_email: elhajjaji.anas@gmail.com
+          # The appname to use for deploying/updating
+          heroku_app_name: thawing-plateau-89576
+          # Will deploy using Dockerfile in project root.
+          usedocker: true
+      
+      - name: Login to docker hub
+        if: success()
+        uses: actions-hub/docker/login@master
+        env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Build image
+        if: success()
+        run: docker build -t ${GITHUB_REPOSITORY}:${IMAGE_TAG} .
+      
+      - name: Push to docker registry
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+        args: push ${GITHUB_REPOSITORY}:${IMAGE_TAG}
