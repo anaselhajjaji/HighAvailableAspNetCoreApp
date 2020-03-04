@@ -1,0 +1,25 @@
+name: CI CD
+
+on:
+   push:
+     branches:    
+      - master
+     tags:
+       - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@master
+
+      - name: Build the solution
+        uses: ./.github/actions/dotnetcore
+
+      - name: Deploy to Pre Production Environment
+        uses: ./.github/actions/heroku
+
+      - name: Publish the image to docker hub
+        uses: ./.github/actions/dockerimage

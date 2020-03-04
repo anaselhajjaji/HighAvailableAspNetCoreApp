@@ -1,0 +1,11 @@
+steps:
+- uses: AkhileshNS/heroku-deploy@v3.0.0
+  with:
+    # This will be used for authentication. You can find it in your heroku homepage account settings
+    heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+    # Email that you use with heroku
+    heroku_email: elhajjaji.anas@gmail.com
+    # The appname to use for deploying/updating
+    heroku_app_name: thawing-plateau-89576
+    # Will deploy using Dockerfile in project root.
+    usedocker: true
