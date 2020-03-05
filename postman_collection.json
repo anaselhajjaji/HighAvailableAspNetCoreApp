@@ -126,7 +126,7 @@
 						"id": "b40e9962-5d35-4408-a7c7-f91c0bd1d75d",
 						"exec": [
 							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body('{\"id\":1,\"firstName\":\"employee1 first name\",\"lastName\":\"employee1 last name\",\"email\":\"employee1 email\"}');",
+							"    pm.response.to.have.body('{\"id\":2,\"firstName\":\"employee2 first name\",\"lastName\":\"employee2 last name\",\"email\":\"employee2 email\"}');",
 							"});"
 						],
 						"type": "text/javascript"
@@ -144,7 +144,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"firstName\": \"employee1 first name\",\r\n  \"lastName\": \"employee1 last name\",\r\n  \"email\": \"employee1 email\"\r\n}"
+					"raw": "{\r\n  \"firstName\": \"employee2 first name\",\r\n  \"lastName\": \"employee2 last name\",\r\n  \"email\": \"employee2 email\"\r\n}"
 				},
 				"url": {
 					"raw": "https://systemdhealthcheck-preprod.herokuapp.com/employees",
