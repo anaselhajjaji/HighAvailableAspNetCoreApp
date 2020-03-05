@@ -24,6 +24,7 @@ namespace Repository
 
         public async Task DeleteAll()
         {
+            generatedId = 0;
             employees.Clear();
         }
     }
