@@ -31,7 +31,7 @@ jobs:
           # Email that you use with heroku
           heroku_email: elhajjaji.anas@gmail.com
           # The appname to use for deploying/updating
-          heroku_app_name: thawing-plateau-89576
+          heroku_app_name: systemdhealthcheck-preprod
           # Will deploy using Dockerfile in project root.
           usedocker: true
       
