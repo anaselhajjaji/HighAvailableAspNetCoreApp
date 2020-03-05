@@ -8,6 +8,7 @@ COPY . .
 RUN dotnet build "SystemdHealthcheck.sln" -c Release -o /app/build
 
 FROM build AS publish
+# Should publish csproj, otherwise there is a runtime error about Newtonsoft.Json (don't undersand why...)
 RUN dotnet publish "./SystemdHealthcheck/SystemdHealthcheck.csproj" -c Release -o /app/publish
 
 FROM base AS final
