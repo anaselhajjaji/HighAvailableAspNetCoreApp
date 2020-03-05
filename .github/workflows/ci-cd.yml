@@ -37,6 +37,12 @@ jobs:
           # Will deploy using Dockerfile in project root.
           usedocker: true
       
+      - name: Test the API using Postman
+        if: success()
+        uses: matt-ball/newman-action@master
+        with:
+            collection: postman_collection.json
+
       - name: Login to docker hub
         if: success()
         uses: actions-hub/docker/login@master
