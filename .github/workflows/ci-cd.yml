@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '10.x'
       - run: npm install -g newman
-      - run: newman run .\postman_collection.json
+      - run: newman run ./postman_collection.json
 
 
       - name: Setup .NET Core
@@ -58,7 +58,7 @@ jobs:
         with:
           node-version: '10.x'
       - run: npm install -g newman
-      - run: newman run .\postman_collection.json
+      - run: newman run ./postman_collection.json
 
       - name: Test the API using Postman
         if: success()
