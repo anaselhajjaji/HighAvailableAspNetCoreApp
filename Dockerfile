@@ -8,7 +8,7 @@ COPY . .
 RUN dotnet build "SystemdHealthcheck.sln" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "SystemdHealthcheck.sln" -c Release -o /app/publish
+RUN dotnet publish "./SystemdHealthcheck/SystemdHealthcheck.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
