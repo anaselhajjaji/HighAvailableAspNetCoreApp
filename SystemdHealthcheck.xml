@@ -31,5 +31,11 @@
              <response code="201">Returns the newly created employee</response>
              <response code="400">If the item is null</response>     
         </member>
+        <member name="M:SystemdHealthcheck.Controllers.EmployeesController.DeleteAll">
+            <summary>
+            Deletes all the employees
+            </summary>
+            <returns>Nothing</returns>
+        </member>
     </members>
 </doc>

@@ -21,5 +21,10 @@ namespace Repository
             element.Id = ++generatedId;
             employees.Add(element);
         }
+
+        public async Task DeleteAll()
+        {
+            employees.Clear();
+        }
     }
 }

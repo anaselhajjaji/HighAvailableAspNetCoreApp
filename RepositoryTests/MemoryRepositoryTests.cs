@@ -22,6 +22,9 @@ namespace Repository.Tests
 
             repository.Insert(new Models.Employee { Id = 2, FirstName = "Employee 2", LastName = "Employee 2", Email = "Email 2" });
             Assert.AreEqual(repository.GetAll().Count(), 2);
+
+            repository.DeleteAll();
+            Assert.AreEqual(repository.GetAll().Count(), 0);
         }
     }
 }

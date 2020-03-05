@@ -9,5 +9,6 @@ namespace Repository
     {
         IEnumerable<T> GetAll();
         Task Insert(T element);
+        Task DeleteAll();
     }
 }

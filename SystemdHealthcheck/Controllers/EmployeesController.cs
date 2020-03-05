@@ -62,5 +62,16 @@ namespace SystemdHealthcheck.Controllers
             await _repository?.Insert(employee);
             return CreatedAtAction(nameof(Get), new { id = employee.Id }, employee);
         }
+
+        /// <summary>
+        /// Deletes all the employees
+        /// </summary>
+        /// <returns>Nothing</returns>
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAll()
+        {
+            await _repository.DeleteAll();
+            return NoContent();
+        }
     }
 }
