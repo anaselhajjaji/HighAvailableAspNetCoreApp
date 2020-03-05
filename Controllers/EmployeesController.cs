@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SystemdHealthcheck.Models;
-using SystemdHealthcheck.Repository;
+using Repository.Models;
+using Repository;
 
 namespace SystemdHealthcheck.Controllers
 {

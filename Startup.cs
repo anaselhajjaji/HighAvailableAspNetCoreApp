@@ -13,9 +13,9 @@ using SystemdHealthcheck.HealthChecks;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using SystemdHealthcheck.Services;
-using SystemdHealthcheck.Repository;
+using Repository;
 using Microsoft.OpenApi.Models;
-using SystemdHealthcheck.Models;
+using Repository.Models;
 using System.Reflection;
 using System.IO;
 

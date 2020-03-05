@@ -10,7 +10,7 @@
             </summary>
             <returns>All the registered employees</returns>
         </member>
-        <member name="M:SystemdHealthcheck.Controllers.EmployeesController.Create(SystemdHealthcheck.Models.Employee)">
+        <member name="M:SystemdHealthcheck.Controllers.EmployeesController.Create(Repository.Models.Employee)">
              <summary>
              Creates an employee.
              </summary>
