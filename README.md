@@ -10,6 +10,12 @@ Health Check UI available at: /health-ui
 
 Swagger available at : /swagger
 
+CI/CD example using Gihub Actions:
+- Unit testing
+- Publish to Heroku
+- API testing using newman
+- Publish to Docker HUB
+
 ## Project initialization
 
 Initial project created with command: `dotnet new webapi --no-https`
