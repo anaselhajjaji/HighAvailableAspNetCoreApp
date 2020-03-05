@@ -15,16 +15,6 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@master
 
-
-      - name: Test the API using Postman
-        if: success()
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - run: npm install -g newman
-      - run: newman run ./postman_collection.json
-
-
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -52,19 +42,15 @@ jobs:
         with:
           time: '30s'
 
-      - name: Test the API using Postman
+      - name: Setup node for API testing using Newman
         if: success()
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - run: npm install -g newman
-      - run: newman run ./postman_collection.json
-
-      - name: Test the API using Postman
-        if: success()
-        uses: matt-ball/newman-action@master
-        with:
-            collection: ./postman_collection.json
+      - name: Install newman using npm
+        run: npm install -g newman
+      - name: Test the API using newman
+        run: newman run ./postman_collection.json
 
       - name: Login to docker hub
         if: success()
@@ -82,3 +68,17 @@ jobs:
         uses: actions-hub/docker@master
         with:
           args: push ${GITHUB_REPOSITORY}:${IMAGE_TAG}
+
+      - name: Deploy to Production Environment
+        if: success()
+        uses: AkhileshNS/heroku-deploy@v3.0.0
+        with:
+          # This will be used for authentication. You can find it in your heroku homepage account settings
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          # Email that you use with heroku
+          heroku_email: elhajjaji.anas@gmail.com
+          # The appname to use for deploying/updating
+          heroku_app_name: systemdhealthcheck-prod
+          # Will deploy using Dockerfile in project root.
+          usedocker: true
+  

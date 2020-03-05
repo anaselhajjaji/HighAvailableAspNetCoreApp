@@ -238,7 +238,7 @@
 						"id": "9925b249-6419-47b7-8205-0a33c7ebbd1b",
 						"exec": [
 							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body(\"[]\");",
+							"    pm.response.to.have.body(\"[anas]\");",
 							"});"
 						],
 						"type": "text/javascript"
