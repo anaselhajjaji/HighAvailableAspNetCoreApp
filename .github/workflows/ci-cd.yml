@@ -15,6 +15,16 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@master
 
+
+      - name: Test the API using Postman
+        if: success()
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: npm install -g newman
+      - run: newman run .\postman_collection.json
+
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -41,6 +51,14 @@ jobs:
         uses: jakejarvis/wait-action@master
         with:
           time: '30s'
+
+      - name: Test the API using Postman
+        if: success()
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: npm install -g newman
+      - run: newman run .\postman_collection.json
 
       - name: Test the API using Postman
         if: success()
