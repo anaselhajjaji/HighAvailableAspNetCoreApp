@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 
 namespace SystemdHealthcheck.Services
 {
-    public class WorkerService : BackgroundService
+    public class SecondWorkerService : BackgroundService
     {
-        private ILogger<WorkerService> _logger;
-        private readonly WorkerServiceHealthCheck _workerServiceHealthCheck;
-        private int stopWorkerAfterSeconds = 30;
-
-        public WorkerService(ILogger<WorkerService> logger,
-            WorkerServiceHealthCheck workerServiceHealthCheck)
+        private ILogger<SecondWorkerService> _logger;
+        private readonly SecondWorkerServiceHealthCheck _workerServiceHealthCheck;
+        
+        public SecondWorkerService(ILogger<SecondWorkerService> logger,
+            SecondWorkerServiceHealthCheck workerServiceHealthCheck)
         {
             this._logger = logger;
             this._workerServiceHealthCheck = workerServiceHealthCheck;
@@ -23,13 +22,12 @@ namespace SystemdHealthcheck.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested && stopWorkerAfterSeconds > 0)
+            while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Worker service running at { time }", DateTimeOffset.Now);
                 _workerServiceHealthCheck.WorkerRunning = true;
 
                 await Task.Delay(1000, stoppingToken);
-                stopWorkerAfterSeconds--;
             }
 
             _workerServiceHealthCheck.WorkerRunning = false;

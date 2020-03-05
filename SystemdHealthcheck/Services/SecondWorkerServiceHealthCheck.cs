@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SystemdHealthcheck.Services
 {
-    public class WorkerServiceHealthCheck : IHealthCheck
+    public class SecondWorkerServiceHealthCheck : IHealthCheck
     {
         private volatile bool _workerRunning = false;
 
-        public string Name => "worker_running_check";
+        public string Name => "second_worker_running_check";
 
         public bool WorkerRunning
         {
@@ -26,11 +26,11 @@ namespace SystemdHealthcheck.Services
             if (WorkerRunning)
             {
                 return Task.FromResult(
-                    HealthCheckResult.Healthy("The worker service is running without problem."));
+                    HealthCheckResult.Healthy("The second worker service is running without problem."));
             }
 
             return Task.FromResult(
-                HealthCheckResult.Unhealthy("The worker running is not running."));
+                HealthCheckResult.Unhealthy("The second worker running is not running."));
         }
     }
 }

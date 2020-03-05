@@ -68,6 +68,8 @@ namespace SystemdHealthcheck
             // Add hosted services
             services.AddHostedService<WorkerService>();
             services.AddSingleton<WorkerServiceHealthCheck>();
+            services.AddHostedService<SecondWorkerService>();
+            services.AddSingleton<SecondWorkerServiceHealthCheck>();
 
             // Add health checks UI
             var port = Environment.GetEnvironmentVariable("PORT");
@@ -75,13 +77,17 @@ namespace SystemdHealthcheck
             {
                 setup.AddHealthCheckEndpoint("Application HealthCheck", "http://localhost:"+ port +"/health");
             });
-            
+
             // Add Health Check publisher
             services.AddHealthChecks()
                 .AddCheck<WorkerServiceHealthCheck>(
                     "worker_running_check",
                     failureStatus: HealthStatus.Degraded,
-                    tags: new[] { "ready" }); ;
+                    tags: new[] { "ready" })
+                .AddCheck<SecondWorkerServiceHealthCheck>(
+                    "second_worker_running_check",
+                    failureStatus: HealthStatus.Degraded,
+                    tags: new[] { "ready" });
 
             services.Configure<HealthCheckPublisherOptions>(options =>
             {
