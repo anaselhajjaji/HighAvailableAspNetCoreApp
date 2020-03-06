@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Repository.Models;
 using Repository;
+using MediatR;
 
 namespace SystemdHealthcheck.Controllers
 {
@@ -14,13 +15,13 @@ namespace SystemdHealthcheck.Controllers
     [Route("[controller]")]
     public class EmployeesController : ControllerBase
     {
-        private readonly IRepository<Employee> _repository;
         private readonly ILogger<EmployeesController> _logger;
+        private readonly IMediator _mediator;
 
-        public EmployeesController(ILogger<EmployeesController> logger, IRepository<Employee> repository)
+        public EmployeesController(ILogger<EmployeesController> logger, IMediator mediator)
         {
             _logger = logger;
-            _repository = repository;
+            this._mediator = mediator;
         }
 
         /// <summary>
@@ -28,10 +29,10 @@ namespace SystemdHealthcheck.Controllers
         /// </summary>
         /// <returns>All the registered employees</returns>
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public async Task<IEnumerable<Employee>> Get()
         {
             _logger.LogInformation("Returning employees.");
-            return _repository?.GetAll();
+            return await _mediator.Send(new GetAllEvent<Employee>());
         }
 
         /// <summary>
@@ -59,8 +60,8 @@ namespace SystemdHealthcheck.Controllers
         public async Task<ActionResult<Employee>> Create(Employee employee)
         {
             _logger.LogInformation("Inserting new employee.");
-            await _repository?.Insert(employee);
-            return CreatedAtAction(nameof(Get), new { id = employee.Id }, employee);
+            var createdEmployee = await _mediator.Send(new CreateEvent<Employee>(employee));
+            return CreatedAtAction(nameof(Get), new { id = createdEmployee.Id }, createdEmployee);
         }
 
         /// <summary>
@@ -70,7 +71,7 @@ namespace SystemdHealthcheck.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteAll()
         {
-            await _repository.DeleteAll();
+            var result = await _mediator.Send(new DeleteAllEvent());
             return NoContent();
         }
     }

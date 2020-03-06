@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.0.9" />
+    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
   </ItemGroup>
 

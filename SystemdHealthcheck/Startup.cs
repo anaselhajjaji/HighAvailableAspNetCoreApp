@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using Repository.Models;
 using System.Reflection;
 using System.IO;
+using MediatR;
 
 namespace SystemdHealthcheck
 {
@@ -97,6 +98,9 @@ namespace SystemdHealthcheck
             });
 
             services.AddSingleton<IHealthCheckPublisher, HealthCheckPublisher>();
+
+            // Add MediatR
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly, typeof(IRepository<>).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

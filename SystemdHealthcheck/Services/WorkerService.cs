@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using MediatR;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,15 @@ namespace SystemdHealthcheck.Services
         private ILogger<WorkerService> _logger;
         private readonly WorkerServiceHealthCheck _workerServiceHealthCheck;
         private int stopWorkerAfterSeconds = 30;
+        private readonly IMediator _mediator;
 
         public WorkerService(ILogger<WorkerService> logger,
-            WorkerServiceHealthCheck workerServiceHealthCheck)
+            WorkerServiceHealthCheck workerServiceHealthCheck,
+            IMediator mediator)
         {
             this._logger = logger;
             this._workerServiceHealthCheck = workerServiceHealthCheck;
+            this._mediator = mediator;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -33,6 +37,7 @@ namespace SystemdHealthcheck.Services
             }
 
             _workerServiceHealthCheck.WorkerRunning = false;
+            await this._mediator.Publish(new ServiceEvent("Worker Service stopped working..."));
         }
     }
 }

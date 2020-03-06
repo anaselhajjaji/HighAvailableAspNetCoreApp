@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using MediatR;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SystemdHealthcheck.Services
 {
-    public class SecondWorkerService : BackgroundService
+    public class SecondWorkerService : BackgroundService, INotificationHandler<ServiceEvent>
     {
         private ILogger<SecondWorkerService> _logger;
         private readonly SecondWorkerServiceHealthCheck _workerServiceHealthCheck;
@@ -31,6 +32,11 @@ namespace SystemdHealthcheck.Services
             }
 
             _workerServiceHealthCheck.WorkerRunning = false;
+        }
+
+        public async Task Handle(ServiceEvent notification, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation($"Received service notification: { notification.Message }");
         }
     }
 }
