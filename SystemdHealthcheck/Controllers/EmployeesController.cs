@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Repository.Models;
 using Repository;
 using MediatR;
+using Repository.Events;
 
 namespace SystemdHealthcheck.Controllers
 {

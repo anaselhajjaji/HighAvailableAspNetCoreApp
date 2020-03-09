@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Repository
+namespace Repository.Events
 {
     public class CreateEvent<T> : IRequest<T>
     {

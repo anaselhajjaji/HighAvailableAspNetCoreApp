@@ -19,6 +19,7 @@ using Repository.Models;
 using System.Reflection;
 using System.IO;
 using MediatR;
+using Repository.Interfaces;
 
 namespace SystemdHealthcheck
 {

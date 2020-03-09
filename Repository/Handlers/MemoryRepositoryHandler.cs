@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Repository.Events;
+using Repository.Interfaces;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Repository
+namespace Repository.Handlers
 {
     public class MemoryRepositoryHandler : IRequestHandler<CreateEvent<Employee>, Employee>, IRequestHandler<DeleteAllEvent, bool>, IRequestHandler<GetAllEvent<Employee>, IEnumerable<Employee>>
     {
