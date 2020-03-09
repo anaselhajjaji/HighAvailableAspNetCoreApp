@@ -2,7 +2,7 @@
 
 # SystemdHealthcheck
 
-Use of systemd healthcheck mechanism
+Use of systemd healthcheck mechanism, and mediator design pattern for communication between the API and the components as well as between HosterServices.
 
 Health Check available at: /health
 
