@@ -10,11 +10,11 @@ namespace ArchTests.Api
     [TestFixture]
     public class ApiTests
     {
-        protected static Assembly ApiAssembly = typeof(Startup).Assembly;
-
         [Test]
         public void EmployeesController_DoesNotHaveDependency_ToRepository()
         {
+            Assembly ApiAssembly = typeof(Startup).Assembly;
+
             var otherModules = new List<string>
             {
                 "Repository"
@@ -26,17 +26,7 @@ namespace ArchTests.Api
                 .NotHaveDependencyOnAny(otherModules.ToArray())
                 .GetResult();
 
-            AssertArchTestResult(result);
-        }
-
-        protected static void AssertFailingTypes(IEnumerable<Type> types)
-        {
-            Assert.That(types, Is.Null.Or.Empty);
-        }
-
-        protected static void AssertArchTestResult(TestResult result)
-        {
-            AssertFailingTypes(result.FailingTypes);
+            Assert.That(result.FailingTypes, Is.Null.Or.Empty);
         }
     }
 }
