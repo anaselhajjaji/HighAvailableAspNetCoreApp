@@ -65,7 +65,8 @@ stages:
           inputs:
             command: 'push'
             searchPatternPush: '$(Build.ArtifactStagingDirectory)/*.nupkg;!$(Build.ArtifactStagingDirectory)/*.Tests.nupkg'
-            feedPublish: 'elhajjajianas'
+            nuGetFeedType: 'internal'
+            publishVstsFeed: 'elhajjajianas'
 
   - stage: Build_Docker_Image
     displayName: Build Docker Image
