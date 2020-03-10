@@ -10,7 +10,7 @@ Health Check UI available at: /health-ui
 
 Swagger available at : /swagger
 
-CI/CD example using Gihub Actions:
+CI/CD example using Gihub Actions as well as Azure Pipelines:
 - Unit testing
 - Publish to Heroku
 - API testing using newman
