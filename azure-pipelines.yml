@@ -1,3 +1,11 @@
+name: $(majorMinorVersion).$(semanticVersion).$(rev:r)
+
+variables:
+  majorMinorVersion: 1.0
+  # semanticVersion counter is automatically incremented by one in each execution of pipeline
+  # second parameter is seed value to reset to every time the referenced majorMinorVersion is changed
+  semanticVersion: $[counter(variables['majorMinorVersion'], 0)]
+
 trigger:
 - master
 
@@ -24,14 +32,14 @@ stages:
           displayName: 'dotnet build $(buildConfiguration)'
 
         - task: DotNetCoreCLI@2
-          displayName: "Test"
+          displayName: "Run Unit Tests"
           inputs:
             command: test
             projects: '**/*Tests/*.csproj'
             arguments: '--configuration $(buildConfiguration)'
 
         - task: DotNetCoreCLI@2
-          displayName: "Publish"
+          displayName: "Publish for Linux-x64"
           inputs:
             command: 'publish'
             publishWebProjects: true
@@ -39,10 +47,25 @@ stages:
             zipAfterPublish: true
 
         - task: PublishBuildArtifacts@1
-          displayName: "Upload Artifacts"
+          displayName: "Upload to job Artifacts"
           inputs:
             pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
             artifactName: 'linux-x64'
+            
+         # Pack a NuGet package
+        - task: DotNetCoreCLI@2
+          displayName: Pack a Nuget Package
+          inputs: 
+            command: 'pack'
+            outputDir: '$(Build.ArtifactStagingDirectory)'
+            versioningScheme: 'byBuildNumber'
+        # Push non test NuGet packages from a build to internal organization Feed
+        - task: DotNetCoreCLI@2
+          displayName: Push the Nuget package to repo
+          inputs:
+            command: 'push'
+            searchPatternPush: '$(Build.ArtifactStagingDirectory)/*.nupkg;!$(Build.ArtifactStagingDirectory)/*.Tests.nupkg'
+            feedPublish: 'elhajjajianas'
 
   - stage: Build_Docker_Image
     displayName: Build Docker Image
