@@ -64,17 +64,17 @@ stages:
     jobs:
     - deployment: Deploy
       displayName: deploy the App
-      pool:
-        vmImage: 'Ubuntu-latest'
-      # creates an environment if it doesn't exist
-      environment: 'anas ubuntu'
+      environment:
+        name: 'QA'
+        resourceType: VirtualMachine
       strategy:
         runOnce:
           deploy:
             steps:
-            - download: current
-              artifact: linux-x64
-            - script: echo Download Artifact
+            - script: |
+                rm -r ~/publish || true
+                mkdir -p ~/publish
+                unzip '$(Pipeline.Workspace)/linux-x64/*.zip' -d ~/publish
 
   - stage: API_Testing
     displayName: Test the API using Newman
