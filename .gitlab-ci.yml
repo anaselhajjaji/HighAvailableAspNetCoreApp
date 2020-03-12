@@ -1,0 +1,39 @@
+image: mcr.microsoft.com/dotnet/core/sdk:3.1
+
+stages:
+    - build
+    - test
+    - publish
+    - deploy
+
+build:
+    stage: build
+    tags: 
+        - docker
+    script:
+        - "dotnet build"
+
+test:
+    stage: test
+    tags: 
+        - docker
+    script: 
+        - "dotnet test"
+        
+publish:
+    stage: publish
+    tags: 
+        - docker
+    script: 
+        - "dotnet publish -c Release -o ./publish"
+    artifacts:
+        paths:
+        - publish/
+        
+deploy-rasp:
+    stage: deploy
+    tags: 
+        - pi-deploy
+    script: 
+        - "rm -fr ~/publish"
+        - "mv ./publish ~/"
