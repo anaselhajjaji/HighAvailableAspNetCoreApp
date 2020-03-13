@@ -45,3 +45,14 @@ Move the file SystemdHealthcheck.service to: `/etc/systemd/system/SystemdHealthc
 Then: `sudo systemctl start SystemdHealthcheck`
 
 To see the status: `sudo systemctl status SystemdHealthcheck`
+
+## Give gitlab-runner sudo permission
+
+`sudo usermod -a -G sudo gitlab-runner`
+
+then,
+`sudo visudo`
+
+and add to the bottom of the file:
+`gitlab-runner ALL=(ALL) NOPASSWD: ALL`
+
