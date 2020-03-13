@@ -2,9 +2,10 @@ image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
 stages:
     - build
-    - test
+    - unit-test
     - publish
     - deploy
+    - api-test
 
 build:
     stage: build
@@ -13,8 +14,8 @@ build:
     script:
         - "dotnet build"
 
-test:
-    stage: test
+unit-test:
+    stage: unit-test
     tags: 
         - docker
     script: 
@@ -25,15 +26,27 @@ publish:
     tags: 
         - docker
     script: 
-        - "dotnet publish -c Release -o ./publish"
+        - "dotnet publish -r linux-arm -c Release -o ./publish"
     artifacts:
         paths:
         - publish/
-        
+
 deploy-rasp:
     stage: deploy
     tags: 
         - pi-deploy
     script: 
+        - "sudo systemctl stop SystemdHealthcheck"
         - "rm -fr ~/publish"
         - "mv ./publish ~/"
+        - "sudo cp -f SystemdHealthcheck.service /etc/systemd/system/"
+        - "sudo systemctl start SystemdHealthcheck"
+        
+api-test:
+    image: node:12
+    stage: api-test
+    tags: 
+        - docker
+    script: 
+        - "npm install -g newman"
+        - "newman run ./local_postman_collection.json"
