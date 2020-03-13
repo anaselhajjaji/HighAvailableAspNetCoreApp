@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "5c15f35a-8722-4b8d-b09a-264e83ac47da",
+		"name": "postman collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "clear employees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d39332f6-3c11-4f8f-b80f-26cab10edd9b",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([204]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://10.28.5.53:80/employees",
+					"protocol": "http",
+					"host": [
+						"10.28.5.53"
+					],
+					"port": "80",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get employees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9925b249-6419-47b7-8205-0a33c7ebbd1b",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"[]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.28.5.53:80/employees",
+					"protocol": "http",
+					"host": [
+						"10.28.5.53"
+					],
+					"port": "80",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create an employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b40e9962-5d35-4408-a7c7-f91c0bd1d75d",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body('{\"id\":1,\"firstName\":\"employee1 first name\",\"lastName\":\"employee1 last name\",\"email\":\"employee1 email\"}');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"employee1 first name\",\r\n  \"lastName\": \"employee1 last name\",\r\n  \"email\": \"employee1 email\"\r\n}"
+				},
+				"url": {
+					"raw": "http://10.28.5.53:80/employees",
+					"protocol": "http",
+					"host": [
+						"10.28.5.53"
+					],
+					"port": "80",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create another employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b40e9962-5d35-4408-a7c7-f91c0bd1d75d",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body('{\"id\":2,\"firstName\":\"employee2 first name\",\"lastName\":\"employee2 last name\",\"email\":\"employee2 email\"}');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"employee2 first name\",\r\n  \"lastName\": \"employee2 last name\",\r\n  \"email\": \"employee2 email\"\r\n}"
+				},
+				"url": {
+					"raw": "http://10.28.5.53:80/employees",
+					"protocol": "http",
+					"host": [
+						"10.28.5.53"
+					],
+					"port": "80",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get employees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9925b249-6419-47b7-8205-0a33c7ebbd1b",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body('[{\"id\":1,\"firstName\":\"employee1 first name\",\"lastName\":\"employee1 last name\",\"email\":\"employee1 email\"},{\"id\":2,\"firstName\":\"employee2 first name\",\"lastName\":\"employee2 last name\",\"email\":\"employee2 email\"}]');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.28.5.53:80/employees",
+					"protocol": "http",
+					"host": [
+						"10.28.5.53"
+					],
+					"port": "80",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clear employees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d39332f6-3c11-4f8f-b80f-26cab10edd9b",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([204]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://10.28.5.53:80/employees",
+					"protocol": "http",
+					"host": [
+						"10.28.5.53"
+					],
+					"port": "80",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get employees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9925b249-6419-47b7-8205-0a33c7ebbd1b",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"[]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.28.5.53:80/employees",
+					"protocol": "http",
+					"host": [
+						"10.28.5.53"
+					],
+					"port": "80",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
