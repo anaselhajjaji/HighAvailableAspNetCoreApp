@@ -3,19 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{E480322F-D4AA-46F4-AA9E-8D925D131D34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcheck.Repository", "Repository\Healthcheck.Repository.csproj", "{E480322F-D4AA-46F4-AA9E-8D925D131D34}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryTests", "RepositoryTests\RepositoryTests.csproj", "{EEFB46D4-9174-47A4-A5DB-0A7E930FA6EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcheck.RepositoryTests", "RepositoryTests\Healthcheck.RepositoryTests.csproj", "{EEFB46D4-9174-47A4-A5DB-0A7E930FA6EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemdHealthcheck", "SystemdHealthcheck\SystemdHealthcheck.csproj", "{49035EEF-D6DB-4380-B30C-7A87AFB6B508}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcheck.Apis", "SystemdHealthcheck\Healthcheck.Apis.csproj", "{49035EEF-D6DB-4380-B30C-7A87AFB6B508}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{A7CCB9E1-70BE-47F1-A98A-FC878CAA8348}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{A7CCB9E1-70BE-47F1-A98A-FC878CAA8348}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{E44FEB35-688F-4DDC-B3D9-581A63B68B91}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6C0E2F31-8B93-4371-AAAD-175380E5C0CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchTests", "ArchTests\ArchTests.csproj", "{909938CF-D183-4560-94DD-17F77E2F53AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcheck.ArchTests", "ArchTests\Healthcheck.ArchTests.csproj", "{909938CF-D183-4560-94DD-17F77E2F53AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{ABE69B0F-C30A-4C37-908D-60DA20C0F179}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcheck.Model", "Healthcheck.Model\Healthcheck.Model.csproj", "{C5E4D962-369F-4B78-AB5E-217814343DAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{909938CF-D183-4560-94DD-17F77E2F53AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{909938CF-D183-4560-94DD-17F77E2F53AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{909938CF-D183-4560-94DD-17F77E2F53AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5E4D962-369F-4B78-AB5E-217814343DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E4D962-369F-4B78-AB5E-217814343DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E4D962-369F-4B78-AB5E-217814343DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E4D962-369F-4B78-AB5E-217814343DAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{EEFB46D4-9174-47A4-A5DB-0A7E930FA6EB} = {A7CCB9E1-70BE-47F1-A98A-FC878CAA8348}
 		{49035EEF-D6DB-4380-B30C-7A87AFB6B508} = {E44FEB35-688F-4DDC-B3D9-581A63B68B91}
 		{909938CF-D183-4560-94DD-17F77E2F53AB} = {6C0E2F31-8B93-4371-AAAD-175380E5C0CB}
+		{C5E4D962-369F-4B78-AB5E-217814343DAE} = {ABE69B0F-C30A-4C37-908D-60DA20C0F179}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5C37014-EE6E-48CD-A14C-A22E25FE4443}

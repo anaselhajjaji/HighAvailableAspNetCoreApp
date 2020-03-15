@@ -9,7 +9,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace SystemdHealthcheck.HealthChecks
+namespace Healthcheck.Apis.HealthChecks
 {
     public class HealthCheckPublisher : IHealthCheckPublisher
     {

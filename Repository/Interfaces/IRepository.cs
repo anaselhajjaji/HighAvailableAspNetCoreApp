@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Repository.Interfaces
+namespace Healthcheck.Repository.Interfaces
 {
     public interface IRepository<T>
     {

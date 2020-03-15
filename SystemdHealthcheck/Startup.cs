@@ -9,19 +9,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using SystemdHealthcheck.HealthChecks;
+using Healthcheck.Apis.HealthChecks;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using SystemdHealthcheck.Services;
-using Repository;
 using Microsoft.OpenApi.Models;
-using Repository.Models;
 using System.Reflection;
 using System.IO;
 using MediatR;
-using Repository.Interfaces;
+using Healthcheck.Repository.Interfaces;
+using Healthcheck.Repository;
+using Healthcheck.Apis.Services;
+using Healthcheck.Model.Dtos;
 
-namespace SystemdHealthcheck
+namespace Healthcheck.Apis
 {
     public class Startup
     {

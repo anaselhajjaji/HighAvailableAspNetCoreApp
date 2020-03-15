@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>SystemdHealthcheck</name>
+        <name>Healthcheck.Apis</name>
     </assembly>
     <members>
-        <member name="M:SystemdHealthcheck.Controllers.EmployeesController.Get">
+        <member name="M:Healthcheck.Apis.Controllers.EmployeesController.Get">
             <summary>
             Returns all the registered employees.
             </summary>
             <returns>All the registered employees</returns>
         </member>
-        <member name="M:SystemdHealthcheck.Controllers.EmployeesController.Create(Repository.Models.Employee)">
+        <member name="M:Healthcheck.Apis.Controllers.EmployeesController.Create(Healthcheck.Model.Dtos.Employee)">
              <summary>
              Creates an employee.
              </summary>
@@ -31,7 +31,7 @@
              <response code="201">Returns the newly created employee</response>
              <response code="400">If the item is null</response>     
         </member>
-        <member name="M:SystemdHealthcheck.Controllers.EmployeesController.DeleteAll">
+        <member name="M:Healthcheck.Apis.Controllers.EmployeesController.DeleteAll">
             <summary>
             Deletes all the employees
             </summary>

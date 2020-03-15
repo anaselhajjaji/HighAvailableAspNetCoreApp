@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Repository.Models;
-using Repository;
 using MediatR;
-using Repository.Events;
+using Healthcheck.Model.Dtos;
+using Healthcheck.Model.Events;
 
-namespace SystemdHealthcheck.Controllers
+namespace Healthcheck.Apis.Controllers
 {
     [ApiController]
     [Route("[controller]")]

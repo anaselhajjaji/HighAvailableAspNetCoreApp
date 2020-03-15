@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Repository.Models
+namespace Healthcheck.Model.Dtos
 {
     public class Employee
     {

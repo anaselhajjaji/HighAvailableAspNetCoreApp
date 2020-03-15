@@ -3,9 +3,9 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using SystemdHealthcheck;
+using Healthcheck.Apis;
 
-namespace ArchTests.Api
+namespace Healthcheck.ArchTests
 {
     [TestFixture]
     public class ApiTests
@@ -17,11 +17,11 @@ namespace ArchTests.Api
 
             var otherModules = new List<string>
             {
-                "Repository"
+                "Healthcheck.Repository"
             };
             var result = Types.InAssembly(ApiAssembly)
                 .That()
-                .ResideInNamespace("SystemdHealthcheck.Controllers")
+                .ResideInNamespace("Healthcheck.Apis.Controllers")
                 .Should()
                 .NotHaveDependencyOnAny(otherModules.ToArray())
                 .GetResult();

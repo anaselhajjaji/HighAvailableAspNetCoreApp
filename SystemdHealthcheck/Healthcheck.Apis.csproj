@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Repository\Repository.csproj" />
+    <ProjectReference Include="..\Repository\Healthcheck.Repository.csproj" />
   </ItemGroup>
 
 
