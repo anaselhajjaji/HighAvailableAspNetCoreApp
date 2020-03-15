@@ -1,0 +1,119 @@
+name: $(majorMinorVersion).$(semanticVersion).$(rev:r)
+
+variables:
+  majorMinorVersion: 1.0
+  # semanticVersion counter is automatically incremented by one in each execution of pipeline
+  # second parameter is seed value to reset to every time the referenced majorMinorVersion is changed
+  semanticVersion: $[counter(variables['majorMinorVersion'], 0)]
+
+trigger:
+- master
+
+stages:
+  - stage: Build_App
+    displayName: Build the Application
+    jobs:
+    - job: Build_App_Job
+      displayName: Build the Application
+      
+      pool:
+        vmImage: 'ubuntu-latest'
+
+      variables:
+        buildConfiguration: 'Release'
+
+      steps:
+        - task: UseDotNet@2 
+          displayName: ".NET Core 3.1.x"
+          inputs:
+            version: '3.1.x'
+            packageType: sdk
+        - script: dotnet build --configuration $(buildConfiguration)
+          displayName: 'dotnet build $(buildConfiguration)'
+
+        - task: DotNetCoreCLI@2
+          displayName: "Run Unit Tests"
+          inputs:
+            command: test
+            projects: '**/*Tests/*.csproj'
+            arguments: '--configuration $(buildConfiguration)'
+
+        - task: DotNetCoreCLI@2
+          displayName: "Publish for Linux-x64"
+          inputs:
+            command: 'publish'
+            publishWebProjects: true
+            arguments: '-r linux-x64 --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory) --self-contained true'
+            zipAfterPublish: true
+
+        - task: PublishBuildArtifacts@1
+          displayName: "Upload to job Artifacts"
+          inputs:
+            pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+            artifactName: 'linux-x64'
+            
+         # Pack a NuGet package
+        - task: DotNetCoreCLI@2
+          displayName: Pack a Nuget Package
+          inputs: 
+            command: 'pack'
+            outputDir: '$(Build.ArtifactStagingDirectory)'
+            versioningScheme: 'byBuildNumber'
+        # Push non test NuGet packages from a build to internal organization Feed
+        - task: DotNetCoreCLI@2
+          displayName: Push the Nuget package to repo
+          inputs:
+            command: 'push'
+            searchPatternPush: '$(Build.ArtifactStagingDirectory)/*.nupkg;!$(Build.ArtifactStagingDirectory)/*.Tests.nupkg'
+            nuGetFeedType: 'internal'
+            publishVstsFeed: 'elhajjajianas'
+
+  - stage: Build_Docker_Image
+    displayName: Build Docker Image
+    jobs:  
+    - job: Build_Docker_Image_Job
+      displayName: Build Docker Image
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+      - task: Docker@2
+        displayName: Build an image
+        inputs:
+          command: build
+          dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+          tags: |
+            $(tag)
+
+  - stage: Deploy
+    jobs:
+    - deployment: Deploy
+      displayName: deploy the App
+      environment:
+        name: 'QA'
+        resourceType: VirtualMachine
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - script: |
+                rm -r ~/publish || true
+                mkdir -p ~/publish
+                unzip '$(Pipeline.Workspace)/linux-x64/*.zip' -d ~/publish
+
+  - stage: API_Testing
+    displayName: Test the API using Newman
+    jobs:
+    - job: API_Testing_Job
+      displayName: Test the API using Newman
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install Node.js'
+      - script: |
+          npm install
+          npm run build
+          npm install -g newman
+          newman run ./postman_collection.json

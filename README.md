@@ -10,7 +10,7 @@ Health Check UI available at: /health-ui
 
 Swagger available at : /swagger
 
-CI/CD example using Gihub Actions:
+CI/CD example using Gihub Actions, Azure Pipelines and Gitlab CI:
 - Unit testing
 - Publish to Heroku
 - API testing using newman
@@ -45,3 +45,14 @@ Move the file SystemdHealthcheck.service to: `/etc/systemd/system/SystemdHealthc
 Then: `sudo systemctl start SystemdHealthcheck`
 
 To see the status: `sudo systemctl status SystemdHealthcheck`
+
+## Give gitlab-runner sudo permission
+
+`sudo usermod -a -G sudo gitlab-runner`
+
+then,
+`sudo visudo`
+
+and add to the bottom of the file:
+`gitlab-runner ALL=(ALL) NOPASSWD: ALL`
+
