@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\anahaj1\Documents\samples\SystemdHealthcheck\SystemdHealthcheck.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\anahaj1\Documents\samples\SystemdHealthcheck\Healthcheck.Apis.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\anahaj1\Documents\samples\SystemdHealthcheck\SystemdHealthcheck.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\anahaj1\Documents\samples\SystemdHealthcheck\Healthcheck.Apis.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
