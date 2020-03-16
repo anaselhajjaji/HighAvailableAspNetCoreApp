@@ -1,4 +1,4 @@
-![CI CD](https://github.com/anaselhajjaji/systemdhealthcheck/workflows/CI%20CD/badge.svg?branch=master)
+![CI CD](https://github.com/anaselhajjaji/systemdhealthcheck/workflows/CI%20CD/badge.svg?branch=master) [![Build Status](https://dev.azure.com/elhajjajianas/HighAvailableAspNetCoreApp/_apis/build/status/anaselhajjaji.HighAvailableAspNetCoreApp?branchName=master)](https://dev.azure.com/elhajjajianas/HighAvailableAspNetCoreApp/_build/latest?definitionId=7&branchName=master)
 
 # SystemdHealthcheck
 
