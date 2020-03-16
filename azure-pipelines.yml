@@ -84,21 +84,21 @@ stages:
           tags: |
             $(tag)
 
-  - stage: Deploy
-    jobs:
-    - deployment: Deploy
-      displayName: deploy the App
-      environment:
-        name: 'QA'
-        resourceType: VirtualMachine
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-            - script: |
-                rm -r ~/publish || true
-                mkdir -p ~/publish
-                unzip '$(Pipeline.Workspace)/linux-x64/*.zip' -d ~/publish
+#  - stage: Deploy
+#    jobs:
+#    - deployment: Deploy
+#      displayName: deploy the App
+#      environment:
+#        name: 'QA'
+#        resourceType: VirtualMachine
+#      strategy:
+#        runOnce:
+#          deploy:
+#            steps:
+#            - script: |
+#                rm -r ~/publish || true
+#                mkdir -p ~/publish
+#                unzip '$(Pipeline.Workspace)/linux-x64/*.zip' -d ~/publish
 
   - stage: API_Testing
     displayName: Test the API using Newman
