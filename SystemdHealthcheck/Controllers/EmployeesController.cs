@@ -55,7 +55,7 @@ namespace Healthcheck.Apis.Controllers
             catch (Exception e)
             {
                 _logger.LogError(e, $"Employee with ID {id} not found.");
-                return NotFound();
+                return NotFound(id);
             }
         }
 
