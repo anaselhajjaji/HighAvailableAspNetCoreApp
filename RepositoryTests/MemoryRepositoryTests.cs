@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Healthcheck.Model.Dtos;
+using System.Threading.Tasks;
 
 namespace Healthcheck.Repository.Tests
 {
@@ -12,20 +13,24 @@ namespace Healthcheck.Repository.Tests
     public class MemoryRepositoryTests
     {
         [TestMethod()]
-        public void InsertTest()
+        public async Task InsertTest()
         {
             MemoryRepository repository = new MemoryRepository();
+            IEnumerable<Employee> employeeList = await repository.GetAll();
 
-            Assert.AreEqual(repository.GetAll().Count(), 0);
+            Assert.AreEqual(employeeList.Count(), 0);
 
-            repository.Insert(new Employee { Id = 1, FirstName = "Employee 1", LastName = "Employee 1", Email = "Email 1" });
-            Assert.AreEqual(repository.GetAll().Count(), 1);
+            await repository.Insert(new Employee { Id = 1, FirstName = "Employee 1", LastName = "Employee 1", Email = "Email 1" });
+            employeeList = await repository.GetAll();
+            Assert.AreEqual(employeeList.Count(), 1);
 
-            repository.Insert(new Employee { Id = 2, FirstName = "Employee 2", LastName = "Employee 2", Email = "Email 2" });
-            Assert.AreEqual(repository.GetAll().Count(), 2);
+            await repository.Insert(new Employee { Id = 2, FirstName = "Employee 2", LastName = "Employee 2", Email = "Email 2" });
+            employeeList = await repository.GetAll();
+            Assert.AreEqual(employeeList.Count(), 2);
 
-            repository.DeleteAll();
-            Assert.AreEqual(repository.GetAll().Count(), 0);
+            await repository.DeleteAll();
+            employeeList = await repository.GetAll();
+            Assert.AreEqual(employeeList.Count(), 0);
         }
     }
 }
