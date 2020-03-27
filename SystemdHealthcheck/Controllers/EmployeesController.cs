@@ -36,12 +36,36 @@ namespace Healthcheck.Apis.Controllers
         }
 
         /// <summary>
+        /// Return an employee by id.
+        /// </summary>
+        /// <param name="id">the employee id.</param>
+        /// <returns>The employee.</returns>
+        /// <response code="200">Returns the employee</response>
+        /// <response code="404">If the employee is not found</response>     
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<Employee>> Get(int id)
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetEvent<Employee>(id));
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Employee with ID {id} not found.");
+                return NotFound();
+            }
+        }
+
+        /// <summary>
         /// Creates an employee.
         /// </summary>
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /Todo
+        ///     POST /employees
         ///     {
         ///        "id": 1,
         ///        "firstName": "First Name",

@@ -13,7 +13,7 @@ namespace Healthcheck.Repository
         private readonly List<Employee> employees = new List<Employee>();
         private int generatedId = 0;
 
-        public IEnumerable<Employee> GetAll()
+        public async Task<IEnumerable<Employee>> GetAll()
         {
             return employees;
         }
@@ -28,6 +28,11 @@ namespace Healthcheck.Repository
         {
             generatedId = 0;
             employees.Clear();
+        }
+
+        public async Task<Employee> GetById(int id)
+        {
+            return employees.First(s => s.Id == id);
         }
     }
 }

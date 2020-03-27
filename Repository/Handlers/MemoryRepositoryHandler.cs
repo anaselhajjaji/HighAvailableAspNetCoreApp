@@ -10,7 +10,10 @@ using Healthcheck.Model.Dtos;
 
 namespace Healthcheck.Repository.Handlers
 {
-    public class MemoryRepositoryHandler : IRequestHandler<CreateEvent<Employee>, Employee>, IRequestHandler<DeleteAllEvent, bool>, IRequestHandler<GetAllEvent<Employee>, IEnumerable<Employee>>
+    public class MemoryRepositoryHandler : IRequestHandler<CreateEvent<Employee>, Employee>, 
+        IRequestHandler<DeleteAllEvent, bool>, 
+        IRequestHandler<GetAllEvent<Employee>, IEnumerable<Employee>>,
+        IRequestHandler<GetEvent<Employee>, Employee>
     {
         private readonly IRepository<Employee> _repository;
 
@@ -33,7 +36,12 @@ namespace Healthcheck.Repository.Handlers
 
         public async Task<IEnumerable<Employee>> Handle(GetAllEvent<Employee> notification, CancellationToken cancellationToken)
         {
-            return _repository.GetAll();
+            return await _repository.GetAll();
+        }
+
+        public async Task<Employee> Handle(GetEvent<Employee> request, CancellationToken cancellationToken)
+        {
+            return await _repository.GetById(request.Id);
         }
     }
 }

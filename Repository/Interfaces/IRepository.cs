@@ -9,8 +9,9 @@ namespace Healthcheck.Repository.Interfaces
 {
     public interface IRepository<T>
     {
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
         Task Insert(T element);
         Task DeleteAll();
+        Task<T> GetById(int id);
     }
 }
