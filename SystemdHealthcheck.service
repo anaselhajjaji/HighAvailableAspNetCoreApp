@@ -6,7 +6,7 @@ StartLimitIntervalSec=0
 [Service]
 Environment=PORT=5000
 Type=notify
-ExecStart=/home/gitlab-runner/publish/SystemdHealthcheck
+ExecStart=/home/gitlab-runner/publish/Healthcheck.Apis
 Restart=always
 RestartSec=1
 TimeoutSec=60

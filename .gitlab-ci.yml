@@ -26,7 +26,7 @@ publish:
     tags: 
         - docker
     script: 
-        - "dotnet publish -r linux-arm -c Release -o ./publish"
+        - "dotnet publish ./SystemdHealthcheck/Healthcheck.Apis.csproj -r linux-arm -c Release -o ./publish"
     artifacts:
         paths:
         - publish/
