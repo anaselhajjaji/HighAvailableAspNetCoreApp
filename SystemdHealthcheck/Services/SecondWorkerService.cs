@@ -25,7 +25,7 @@ namespace Healthcheck.Apis.Services
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker service running at { time }", DateTimeOffset.Now);
+                _logger.LogInformation($"Worker service running at { DateTimeOffset.Now }");
                 _workerServiceHealthCheck.WorkerRunning = true;
 
                 await Task.Delay(1000, stoppingToken);

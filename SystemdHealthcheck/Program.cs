@@ -17,7 +17,7 @@ namespace Healthcheck.Apis
         {
             Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
-            .WriteTo.Console(new RenderedCompactJsonFormatter())
+            .WriteTo.Console(/* if we want json =>  new RenderedCompactJsonFormatter() */)
             .CreateLogger();
 
             try
