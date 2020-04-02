@@ -16,10 +16,13 @@ namespace Healthcheck.Apis
     {
         public static void Main(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
             Log.Logger = new LoggerConfiguration()
-            .Enrich.FromLogContext()
-            .WriteTo.Console(new JsonFormatter())
-            .CreateLogger();
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
 
             try
             {

@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{ABE69B0F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcheck.Model", "Healthcheck.Model\Healthcheck.Model.csproj", "{C5E4D962-369F-4B78-AB5E-217814343DAE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "log-server", "log-server\log-server.csproj", "{4475BCC5-6DA9-43AB-84B2-701F78B0705C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{C5E4D962-369F-4B78-AB5E-217814343DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5E4D962-369F-4B78-AB5E-217814343DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5E4D962-369F-4B78-AB5E-217814343DAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4475BCC5-6DA9-43AB-84B2-701F78B0705C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4475BCC5-6DA9-43AB-84B2-701F78B0705C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4475BCC5-6DA9-43AB-84B2-701F78B0705C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4475BCC5-6DA9-43AB-84B2-701F78B0705C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{49035EEF-D6DB-4380-B30C-7A87AFB6B508} = {E44FEB35-688F-4DDC-B3D9-581A63B68B91}
 		{909938CF-D183-4560-94DD-17F77E2F53AB} = {6C0E2F31-8B93-4371-AAAD-175380E5C0CB}
 		{C5E4D962-369F-4B78-AB5E-217814343DAE} = {ABE69B0F-C30A-4C37-908D-60DA20C0F179}
+		{4475BCC5-6DA9-43AB-84B2-701F78B0705C} = {6C0E2F31-8B93-4371-AAAD-175380E5C0CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5C37014-EE6E-48CD-A14C-A22E25FE4443}
