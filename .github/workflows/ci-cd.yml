@@ -61,13 +61,13 @@ jobs:
       
       - name: Build image
         if: success()
-        run: docker build -t ${GITHUB_REPOSITORY}:${{ github.run_number }} .
+        run: docker build -t ${GITHUB_REPOSITORY}:${{ github.run_number }} -t ${GITHUB_REPOSITORY}:latest .
       
       - name: Push to docker registry
         if: success()
         uses: actions-hub/docker@master
         with:
-          args: push ${GITHUB_REPOSITORY}:${{ github.run_number }}
+          args: push ${GITHUB_REPOSITORY}
 
       - name: Deploy to Production Environment
         if: success()
