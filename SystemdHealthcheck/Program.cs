@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Formatting.Compact;
+using Serilog.Formatting.Json;
 
 namespace Healthcheck.Apis
 {
@@ -17,7 +18,7 @@ namespace Healthcheck.Apis
         {
             Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
-            .WriteTo.Console(/* if we want json =>  new RenderedCompactJsonFormatter() */)
+            .WriteTo.Console(new JsonFormatter())
             .CreateLogger();
 
             try
@@ -40,7 +41,7 @@ namespace Healthcheck.Apis
             var port = Environment.GetEnvironmentVariable("PORT");
 
             return Host.CreateDefaultBuilder(args)
-                .UseSerilog()
+                .UseSerilog() // To use Serilog
                 .ConfigureWebHostDefaults(webBuilder =>
                     {
                         webBuilder.UseUrls("http://*:"+port);
