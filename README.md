@@ -10,6 +10,8 @@ Health Check UI available at: /health-ui
 
 Swagger available at : /swagger
 
+Serilog is used for logging in console as well as publishing logs to a server.
+
 CI/CD example using Gihub Actions, Azure Pipelines and Gitlab CI:
 - Unit testing
 - Publish to Heroku
