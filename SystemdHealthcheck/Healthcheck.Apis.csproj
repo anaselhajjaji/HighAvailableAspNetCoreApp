@@ -29,5 +29,8 @@
     <ProjectReference Include="..\Repository\Healthcheck.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
 
 </Project>

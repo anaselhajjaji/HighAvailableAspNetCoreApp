@@ -123,6 +123,10 @@ namespace Healthcheck.Apis
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
+            // Serve static files
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseAuthorization();
