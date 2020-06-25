@@ -1,0 +1,26 @@
+version: "3"
+
+networks:
+  my-network:
+
+services:
+  aspnetcore:
+    build: .
+    ports:
+      - "80:80"
+    networks:
+      - my-network
+    deploy: 
+      # To take into consideration the limits:
+      # docker-compose -f docker-compose.limited.yml --compatibility up
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 100M
+  bombardier:
+    image: alpine/bombardier
+    command: -c 200 -d 60s -l http://aspnetcore/employees
+    networks:
+      - my-network
+    depends_on: 
+      - aspnetcore
